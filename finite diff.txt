@@ -1,0 +1,85 @@
+#include<iostream>
+#include<Windows.h>
+#include<math.h>
+#include<cmath>
+using namespace std;
+// L.FINITE DIFFERENCES PROGRAM
+void main()
+{
+	double arrx[10]; //Array Save X Value.
+	double arrfx[10]; //Array Save F(x) Value.
+	double arrdf[20]; //Array Save (Delta F) Value.
+	double arrd2f[20]; //Array Save (Delta 2 F) Value.
+	double arrd3f[20]; //Array Save (Delta 3 F) Value.
+	double arrd4f[20]; //Array Save (Delta 4 F) Value.
+	double seq;                                              // Maximum [Delta 4 F].
+	double h; //h == seq.
+	double point;
+	double u;
+	double lx;
+	int h1; //Using In For Loop.
+	system("color E");
+	cout << "                                      " << endl;
+	cout << "__________{FINITE DIFFERENCES}__________" << endl;
+	cout << "                                      " << endl;
+	cout << "How Meany Value Of X and F(x) : " << endl;
+	cout << "* but maximum (Delta 4 F) ... " << endl;
+	cin >> h1;
+	for (int i = 0; i < h1; i++)
+	{
+		cout << "                                       " << endl;
+		cout << "Enter X Value - " << i << " : " << endl;
+		cin >> arrx[i];
+	}
+	for (int j = 0; j < h1; j++)
+	{
+		cout << "                                       " << endl;
+		cout << "Enter F(x) Value - " << j << " : " << endl;
+		cin >> arrfx[j];
+	}
+	seq = arrx[1] - arrx[0];
+	cout << "Sequence = " << seq << endl;
+
+	for (int a = 0; a < (h1 - 1); a++)
+	{
+		arrdf[a] = arrfx[a + 1] - arrfx[a];
+		Sleep(1000);
+		cout << " =  " << arrdf[a] << " ";
+		cout << endl;
+	}
+
+	cout << "==============================================" << endl;
+	for (int a = 0; a < (h1 - 2); a++)
+	{
+		arrd2f[a] = arrdf[a + 1] - arrdf[a];
+		Sleep(1000);
+		cout << " =  " << arrd2f[a] << " ";
+		cout << endl;
+	}
+	cout << "==============================================" << endl;
+	for (int a = 0; a < (h1 - 3); a++)
+	{
+		arrd3f[a] = arrd2f[a + 1] - arrd2f[a];
+		Sleep(1000);
+		cout << " =  " << arrd3f[a] << " ";
+		cout << endl;
+	}
+	cout << "==============================================" << endl;
+	for (int a = 0; a < (h1 - 4); a++)
+	{
+		arrd4f[a] = arrd3f[a + 1] - arrd3f[a];
+		cout << "Answar = " << arrd4f[a] << endl;
+	}
+	h = seq;
+	cout << "_____________________________________________________" << endl;
+	cout << "Enter Point : " << endl;
+	cin >> point;
+	u = (point - arrx[0]) / h;
+	cout << "u = " << u << endl;                                          //*******                                            //******
+	lx = arrfx[0] + (u * arrdf[0]) + (((u*(u - 1)) / (2 * 1)) * arrd2f[0]) + (((u* (u - 1)* (u - 2)) / (3 * 2 * 1)) * arrd3f[0]) + (((u*(u - 1) * (u - 2) * (u - 3)) / (4 * 3 * 2 * 1)) * arrd4f[0]);
+	cout << "                                           " << endl;
+	cout << "FINAL ANSWAR : " << endl;
+	cout << "               " << endl;
+	cout << " L(" << point << ")" << " = " << lx << " # " << endl;
+
+}
